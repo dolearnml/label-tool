@@ -158,7 +158,7 @@ if ($label_form) {
 
     function printRadioAllClass($allclass)
     {
-        echo "<div class=\"col-lg-4 col-xs-12 RadioArea\">";
+        echo "<div class=\"col-lg-4 col-xs-12\"><div class=\"RadioArea\">";
         foreach ($allclass as $key => $value) {
             echo "<input type=\"radio\" id=\"radio_" . $key . "\" name=\"classname\" value=\"" . $key . "\""
                 . ($key === "unknown" ? "checked" : "")
@@ -166,6 +166,8 @@ if ($label_form) {
         }
         echo "<button type=\"submit\" class=\"btn btn-success\">Submit</button>",
              "<button type=\"button\" class=\"btn btn-link\"><a href=\"/\">Skip this image</a></button><br>",
+           "</div>",
+             "<p>Click on image to enlarge</p>",
            "</div>";
     }
 
@@ -176,8 +178,7 @@ if ($label_form) {
         $pos = rand(0, $count - 1);
         $img_path = join("/", array($image_dir, $data[$pos]["classname"], $data[$pos]["basename"]));
         echo "<div id=\"ImageContainer\" class=\"col-lg-8 col-xs-12\">",
-          "<p>Click to view full screen / full size</p>",
-          "<img class=\"Image\" src=\"" . $img_path . "\"><br>\n",
+          "<img class=\"img-thumbnail img-thumbnail-large\" src=\"" . $img_path . "\"><br>\n",
         //. "<font color=\"white\">Target: ".$data[$pos]["classname"]."</font><br>\n"
           "</div>",
           "<input type=\"hidden\" name=\"img_path\" value=\"" . $img_path . "\">\n"

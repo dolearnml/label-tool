@@ -47,6 +47,7 @@ h1, h3 {
     max-width: 512px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 20px;
 }
 
 .img-thumbnail {
@@ -56,3 +57,9 @@ h1, h3 {
     margin-right: auto;
     display: block;
 }
+
+.img-thumbnail-large {
+    height: auto !important;
+}
+
+
