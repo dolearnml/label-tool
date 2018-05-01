@@ -44,14 +44,15 @@ function printSubmitedLabels($result_file)
             $classname = trim($chunks[1]);
             $tmp = explode("/", $img_path);
             $target = $tmp[count($tmp) - 2];
-            echo "<div class=\"Label col-lg-4 col-xs-12 " . ($classname === $target ? "CorrectLabel" : "WrongLabel") . "\">"
-                . "<img class=\"img-thumbnail\" src=\"" . $img_path . "\" >"
-                . "<button type=\"button\" class=\"btn "
-                . ($classname === $target ? "btn-success" : "btn-danger") . "\">"
-                . ($classname === $target ? "Correct" : "Wrong")
-                . " Label: " . $classname
-                . " Target: " . $target
-                . "</button></div><br>";
+            echo "<div class=\"Label col-lg-4 col-xs-12 hover-container ",
+                    ($classname === $target ? "CorrectLabel" : "WrongLabel") . "\">",
+                "<img class=\"img-thumbnail\" src=\"" . $img_path . "\" >",
+                "<button type=\"button\" class=\"btn ",
+                  ($classname === $target ? "btn-success" : "btn-danger") . "\">",
+                  ($classname === $target ? "Correct: " : "Wrong: "),
+                  $classname,
+                  ($classname === $target ? "" : " (truth = " . $target . ")"),
+                "</button></div><br>";
         }
     }
     echo "</div>";
@@ -177,8 +178,8 @@ if ($label_form) {
         if ($count < 1) return;
         $pos = rand(0, $count - 1);
         $img_path = join("/", array($image_dir, $data[$pos]["classname"], $data[$pos]["basename"]));
-        echo "<div id=\"ImageContainer\" class=\"col-lg-8 col-xs-12\">",
-          "<img class=\"img-thumbnail img-thumbnail-large\" src=\"" . $img_path . "\"><br>\n",
+        echo "<div id=\"ImageContainer\" class=\"col-lg-8 col-xs-12 hover-container \">",
+          "<img class=\"img-thumbnail img-thumbnail-large\" src=\"" . $img_path . "\">\n",
         //. "<font color=\"white\">Target: ".$data[$pos]["classname"]."</font><br>\n"
           "</div>",
           "<input type=\"hidden\" name=\"img_path\" value=\"" . $img_path . "\">\n"

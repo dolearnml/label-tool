@@ -1,13 +1,3 @@
-img.Image {
-    max-width: 512px;
-    max-height: 512px;
-    width: 100%;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-}
-
 div#ImageContainer {
     max-width: 512px;
     margin-top: 20px;
@@ -15,21 +5,8 @@ div#ImageContainer {
     margin-right: auto;
 }
 
-#ImageContainer p {
-  text-align: center;
-}
-
-.CorrectLabel {
-#    background-color: white;
-}
-
-.WrongLabel {
-#    background-color: lightgray;
-}
-
-.Label {
-    margin-left: auto;
-    margin-right: auto;
+.hover-container:hover {
+    opacity: 0.6;
 }
 
 .Label button {
