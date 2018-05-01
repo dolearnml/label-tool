@@ -26,8 +26,7 @@ sudo systemctl restart php7.0-fpm
 in nginx configuration file `/etc/nginx/sites-available/default`
 * add `index.php` to `index` directive
 * uncomment `include snippets/fastcgi-php.conf;`
-* uncomment `location ~ \.php$ {}` block
-* within the above block, uncomment `fastcgi_pass unix:/run/php/php7.0-fpm.sock;`
+* uncomment `location ~ \.php$ {}` block and within the block, uncomment `fastcgi_pass unix:/run/php/php7.0-fpm.sock;` and `include snippets/fastcgi-php.conf;`
 * uncomment `location ~ /\.ht {}` block
 ```bash
 sudo nano /etc/nginx/sites-available/default
