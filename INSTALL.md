@@ -1,12 +1,10 @@
-# Pull git repository
-```bash
-sudo apt update
-sudo apt install -y git
-git clone https://github.com/dolearnml/label-tool.git label
-```
+Installation consists of 3 main steps
+1. Install LEMP stack (Linux, Nginx, MySQL, PHP)
+2. Install Memcached (for memory caching of PHP objects)
+3. Prepare the server (code/data/results)
 
 # Install LEMP stack
-https://www.digitalocean.com/community/tutorials
+https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-in-ubuntu-16-04
 
 ```bash
 sudo apt install -y nginx
@@ -96,9 +94,17 @@ sudo nano /etc/php/7.0/fpm/php.ini
 sudo systemctl restart php7.0-fpm
 ```
 
+# Prepare the server
+### Pull git repository
+```bash
+sudo apt update
+sudo apt install -y git
+git clone https://github.com/dolearnml/label-tool.git label
+```
+
 ### Copy the code and set permissions
 ```bash
-sudo cp -R <path to label-tool repository>/* /var/www/html/
+sudo cp -R label/* /var/www/html/
 sudo chown $USER:www-data /var/www/html -R
 sudo find /var/www/html -type d -exec chmod g+s {} \;
 ```
