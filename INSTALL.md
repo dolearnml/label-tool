@@ -1,10 +1,3 @@
-# Pull git repository
-```bash
-sudo apt update
-sudo apt install -y git
-git clone https://github.com/dolearnml/label-tool.git label
-```
-
 # Install LEMP stack
 https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-in-ubuntu-16-04
 
@@ -97,9 +90,16 @@ sudo systemctl restart php7.0-fpm
 ```
 
 # Prepare the server
+### Pull git repository
+```bash
+sudo apt update
+sudo apt install -y git
+git clone https://github.com/dolearnml/label-tool.git label
+```
+
 ### Copy the code and set permissions
 ```bash
-sudo cp -R <path to label-tool repository>/* /var/www/html/
+sudo cp -R label/* /var/www/html/
 sudo chown $USER:www-data /var/www/html -R
 sudo find /var/www/html -type d -exec chmod g+s {} \;
 ```
