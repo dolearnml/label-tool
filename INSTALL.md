@@ -53,7 +53,7 @@ memcstat --servers="127.0.0.1"
 ```
 
 ### Config memcached 
-in /etc/memcached.conf
+in `/etc/memcached.conf`
 * add SASL support directive -S
 * set verbose -vv
 ```bash
@@ -70,7 +70,7 @@ sudo apt-get install -y sasl2-bin
 sudo mkdir -p /etc/sasl2
 sudo nano /etc/sasl2/memcached.conf 
 ```
-Add the following lines to /etc/sasl2/memcached.conf 
+Add the following lines to `/etc/sasl2/memcached.conf`
 ```
 mech_list: plain
 log_level: 5
