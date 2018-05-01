@@ -26,7 +26,8 @@
 <a href="/?results">View submitted labels</a><br>
 <a href="/">Labeling tool (Skip this image)</a><br>
 <?php
-$result_file = '/var/www/label/results/results.txt';
+$root_dir = '/var/www/html';
+$result_file = join('/', array($root_dir, 'results/results.txt'));
 $label_form = true;
 
 function printSubmitedLabels($result_file)
@@ -116,7 +117,7 @@ if ($label_form) {
 
     function getMyCache()
     {
-        global $mc, $image_dir, $allclass, $data;
+        global $mc, $image_dir, $allclass, $data, $root_dir;
         $response = $mc->get('mycache');
         $mycache = unserialize($response);
 
@@ -126,7 +127,8 @@ if ($label_form) {
             $allclass = $mycache->allclass;
             $data = $mycache->data;
         } else {
-            $pattern = join("/", array("/var/www/label", $image_dir, "*/*.jpg"));
+            $pattern = join("/", array($root_dir, $image_dir, "*/*.jpg"));
+            //echo $pattern, "<br>";
             $count = 0;
             foreach (glob($pattern) as $filename) {
                 $chunks = explode('/', $filename);
@@ -143,9 +145,10 @@ if ($label_form) {
                 $count++;
             }
 
-            //echo "Adding to cache mycache=Test<br>";
             $mycache = new Data($image_dir, $allclass, $data);
             $mc->set("mycache", serialize($mycache)) or die("Cannot create new key, mycache not found");
+            //echo "Added to cache key=mycache<br>";
+            //var_dump($mycache);
         }
 
     }
@@ -165,6 +168,7 @@ if ($label_form) {
     function chooseRandomImage($image_dir, $data)
     {
         $count = count($data);
+        if ($count < 1) return;
         $pos = rand(0, $count - 1);
         $img_path = join("/", array($image_dir, $data[$pos]["classname"], $data[$pos]["basename"]));
         echo "<div id=\"ImageContainer\">"
