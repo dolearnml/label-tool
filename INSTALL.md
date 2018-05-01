@@ -19,26 +19,20 @@ sudo apt install -y php-fpm php-mysql php-memcached
 in `/etc/php/7.0/fpm/php.ini` set `cgi.fix_pathinfo=0`
 ```bash
 sudo nano /etc/php/7.0/fpm/php.ini
+sudo systemctl restart php7.0-fpm
 ```
 
 ### Config nginx
-in nginx configuration file /etc/nginx/sites-available/default
+in nginx configuration file `/etc/nginx/sites-available/default`
 * add `index.php` to `index` directive
 * uncomment `include snippets/fastcgi-php.conf;`
-* uncomment `fastcgi_pass unix:/run/php/php7.0-fpm.sock;`
+* uncomment `location ~ \.php$ {}` block
+* within the above block, uncomment `fastcgi_pass unix:/run/php/php7.0-fpm.sock;`
 * uncomment `location ~ /\.ht {}` block
 ```bash
 sudo nano /etc/nginx/sites-available/default
-```
-
-### Test nginx configuration
-```bash
-sudo nginx -t
-```
-
-### Reload nginx server
-```bash
-sudo systemctl reload nginx
+sudo nginx -t # test nginx configuration
+sudo systemctl reload nginx # reload nginx server
 ```
 
 ### Test PHP with `<?php phpinfo();`
@@ -90,7 +84,7 @@ sudo systemctl restart memcached
 memcstat --servers="127.0.0.1" --username=www-data --password=1234
 echo $?
 ```
-If the last step fails, check if `hostname` is exact in /etc/sasl2/memcached-sasldb2
+If the last step fails, check if `hostname` is exact in `/etc/sasl2/memcached-sasldb2`
 
 ### Enable SASL support for PHP
 Add the following line to `/etc/php/7.0/fpm/php.ini` and restart `php7.0-fpm`
@@ -106,7 +100,7 @@ sudo systemctl restart php7.0-fpm
 ### Copy the code and set permissions
 ```bash
 sudo cp -R <path to label-tool repository>/* /var/www/html/
-sudo chown dolearnml:www-data /var/www/html -R
+sudo chown $USER:www-data /var/www/html -R
 sudo find /var/www/html -type d -exec chmod g+s {} \;
 ```
 
