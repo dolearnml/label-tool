@@ -165,8 +165,8 @@ if ($label_form) {
                 . "><label for=\"radio_" . $key . "\">&nbsp;" . $value . "</label><br>\n";
         }
         echo "<button type=\"submit\" class=\"btn btn-success\">Submit</button>",
-             "<button type=\"button\" class=\"btn btn-link\"><a href=\"/\">Skip this image</a></button><br>",
-           "</div>",
+             "<a href=\"/\" class=\"btn btn-link\">Skip this image</a>",
+           "</div><br>",
              "<p>Click on image to enlarge</p>",
            "</div>";
     }
