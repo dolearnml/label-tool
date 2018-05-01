@@ -1,3 +1,8 @@
+Installation consists of 3 main steps
+1. Install LEMP stack (Linux, Nginx, MySQL, PHP)
+2. Install Memcached (for memory caching of PHP objects)
+3. Prepare the server (code/data/results)
+
 # Install LEMP stack
 https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-in-ubuntu-16-04
 
