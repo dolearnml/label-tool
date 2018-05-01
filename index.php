@@ -24,7 +24,8 @@
 <div class="container">
 <h1>Labeling tool</h1>
 <a href="/?results">View submitted labels</a><br>
-<a href="/">Labeling tool (Skip this image)</a><br>
+<a href="/">Labeling tool (Skip this image)</a>&nbsp;&nbsp;
+<a href="/?reset">Reset memcache data</a><br>
 <?php
 $root_dir = '/var/www/html';
 $result_file = join('/', array($root_dir, 'results/results.txt'));
