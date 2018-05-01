@@ -23,11 +23,12 @@
 
 <div class="container">
 <h1>Labeling tool</h1>
+<a href="/results/results.txt">Download submitted labels</a>&nbsp;&nbsp;
 <a href="/?results">View submitted labels</a><br>
 <a href="/">Labeling tool (Skip this image)</a>&nbsp;&nbsp;
 <a href="/?reset">Reset memcache data</a><br>
 <?php
-$root_dir = '/var/www/html';
+$root_dir = '/var/www/label';
 $result_file = join('/', array($root_dir, 'results/results.txt'));
 $label_form = true;
 
@@ -67,7 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } elseif (isset($_GET['results'])) {
     ?>
   <h3>Labels submmited</h3>
-  <a href="results/results.txt">Download results</a><br>
 <?php
 printSubmitedLabels($result_file);
     $label_form = false;
@@ -162,8 +162,9 @@ if ($label_form) {
                 . ($key === "unknown" ? "checked" : "")
                 . "><label for=\"radio_" . $key . "\">&nbsp;" . $value . "</label><br>\n";
         }
-        echo "<button type=\"submit\" class=\"btn btn-success\">Submit</button><br>",
-            "</div>";
+        echo "<button type=\"submit\" class=\"btn btn-success\">Submit</button>",
+             "<button type=\"button\" class=\"btn btn-link\"><a href=\"/\">Skip this image</a></button><br>",
+           "</div>";
     }
 
     function chooseRandomImage($image_dir, $data)
