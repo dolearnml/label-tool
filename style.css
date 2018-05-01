@@ -15,17 +15,19 @@ div#ImageContainer {
     margin-right: auto;
 }
 
+#ImageContainer p {
+  text-align: center;
+}
+
 .CorrectLabel {
-    background-color: white;
+#    background-color: white;
 }
 
 .WrongLabel {
-    background-color: lightgray;
+#    background-color: lightgray;
 }
 
 .Label {
-    max-width: 600px;
-    max-height: 600px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -45,4 +47,12 @@ h1, h3 {
     max-width: 512px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.img-thumbnail {
+    width: auto;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }

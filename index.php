@@ -36,6 +36,7 @@ function printSubmitedLabels($result_file)
 {
     $contents = file($result_file);
     //var_dump($contents);
+    echo "<div class=\"row row-eq-height\">";
     foreach ($contents as $line) {
         $chunks = explode(",", $line);
         if (count($chunks) === 2) {
@@ -43,8 +44,8 @@ function printSubmitedLabels($result_file)
             $classname = trim($chunks[1]);
             $tmp = explode("/", $img_path);
             $target = $tmp[count($tmp) - 2];
-            echo "<div class=\"Label " . ($classname === $target ? "CorrectLabel" : "WrongLabel") . "\">"
-                . "<img class=\"Image\" src=\"" . $img_path . "\" width=\"512px\" >"
+            echo "<div class=\"Label col-lg-4 col-xs-12 " . ($classname === $target ? "CorrectLabel" : "WrongLabel") . "\">"
+                . "<img class=\"img-thumbnail\" src=\"" . $img_path . "\" >"
                 . "<button type=\"button\" class=\"btn "
                 . ($classname === $target ? "btn-success" : "btn-danger") . "\">"
                 . ($classname === $target ? "Correct" : "Wrong")
@@ -53,6 +54,7 @@ function printSubmitedLabels($result_file)
                 . "</button></div><br>";
         }
     }
+    echo "</div>";
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -156,7 +158,7 @@ if ($label_form) {
 
     function printRadioAllClass($allclass)
     {
-        echo "<div class=\"RadioArea\">";
+        echo "<div class=\"col-lg-4 col-xs-12 RadioArea\">";
         foreach ($allclass as $key => $value) {
             echo "<input type=\"radio\" id=\"radio_" . $key . "\" name=\"classname\" value=\"" . $key . "\""
                 . ($key === "unknown" ? "checked" : "")
@@ -173,21 +175,25 @@ if ($label_form) {
         if ($count < 1) return;
         $pos = rand(0, $count - 1);
         $img_path = join("/", array($image_dir, $data[$pos]["classname"], $data[$pos]["basename"]));
-        echo "<div id=\"ImageContainer\">"
-        . "<img class=\"Image\" src=\"" . $img_path . "\"><br>\n"
+        echo "<div id=\"ImageContainer\" class=\"col-lg-8 col-xs-12\">",
+          "<p>Click to view full screen / full size</p>",
+          "<img class=\"Image\" src=\"" . $img_path . "\"><br>\n",
         //. "<font color=\"white\">Target: ".$data[$pos]["classname"]."</font><br>\n"
-         . "</div>"
-            . "<input type=\"hidden\" name=\"img_path\" value=\"" . $img_path . "\">\n"
+          "</div>",
+          "<input type=\"hidden\" name=\"img_path\" value=\"" . $img_path . "\">\n"
         ;
     }
 
     setMemcachedOptions();
     getMyCache();
-
+?>
+    <div class="row">
+<?php
     printRadioAllClass($allclass);
 
     chooseRandomImage($image_dir, $data);
-    ?>
+?>
+    </div>
   </form>
 </div>
 <?php
