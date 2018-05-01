@@ -1,8 +1,15 @@
 <html>
 <head>
 <title>Labeling Tool</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+<!--
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+-->
+<style id="atf" data-btf="/assets/css/bootstrap.min.css;/assets/css/style.css">
+</style>
+<!--
 <link rel="stylesheet" type="text/css" href="style.css?v=2">
+-->
 <link rel="icon" href="/favicon.ico?v=2">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -29,11 +36,15 @@
 <a href="/?reset">Reset memcache data</a><br>
 <?php
 $root_dir = '/var/www/html';
+$image_dir = 'images';
+$thumb_dir = 'thumbnails';
 $result_file = join('/', array($root_dir, 'results/results.txt'));
 $label_form = true;
 
 function printSubmitedLabels($result_file)
 {
+    global $image_dir, $thumb_dir;
+
     $contents = file($result_file);
     //var_dump($contents);
     echo "<div class=\"row row-eq-height\">";
@@ -41,12 +52,13 @@ function printSubmitedLabels($result_file)
         $chunks = explode(",", $line);
         if (count($chunks) === 2) {
             $img_path = $chunks[0];
+            $thumb_path = $thumb_dir . substr($img_path, strlen($image_dir));
             $classname = trim($chunks[1]);
             $tmp = explode("/", $img_path);
             $target = $tmp[count($tmp) - 2];
             echo "<div class=\"Label col-lg-4 col-xs-12 hover-container ",
                     ($classname === $target ? "CorrectLabel" : "WrongLabel") . "\">",
-                "<img class=\"img-thumbnail\" src=\"" . $img_path . "\" >",
+                "<img class=\"img-thumbnail\" src=\"" . $thumb_path . "\" >",
                 "<button type=\"button\" class=\"btn ",
                   ($classname === $target ? "btn-success" : "btn-danger") . "\">",
                   ($classname === $target ? "Correct: " : "Wrong: "),
@@ -84,7 +96,6 @@ if ($label_form) {
 <?php
 
     $mc = new Memcached();
-    $image_dir = 'images';
     $allclass = array("unknown" => "unknown");
     $data = array();
 
@@ -202,16 +213,20 @@ if ($label_form) {
 } // if ($label_form) {
 ?>
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<script src="/assets/js/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="/assets/js/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="/assets/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 <script>
 $(function() {
     $('img').on('click', function() {
-        $('.enlargeImageModalSource').attr('src', $(this).attr('src'));
+        thumbpath = $(this).attr('src');
+        imgpath = 'images' + thumbpath.substr('thumbnails'.length);
+        //console.log(thumbpath, imgpath);
+        $('.enlargeImageModalSource').attr('src', imgpath);
         $('#enlargeImageModal').modal('show');
     });
 });
 </script>
+<script async src="/assets/js/btf.js"></script>
 </body>
 </html>

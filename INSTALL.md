@@ -131,6 +131,14 @@ cp ~/Downloads/cat1.jpg /var/www/html/images/cat
 cp ~/Downloads/cat2.jpg /var/www/html/images/cat
 ```
 
+### Create `/var/www/html/thumbnails` folder structures similar to `images` folder
+```bash
+sudo apt install -y imagemagick
+cd /var/www/html/images
+for i in *; do mkdir -p /var/www/html/thumbnails/$i; done
+for i in */*.jpg; do echo $i; convert -thumbnail 200 $i /var/www/html/thumbnails/$i; done
+```
+
 ### Create result file at `/var/www/html/results/results.txt`
 ```bash
 touch /var/www/html/results/results.txt
