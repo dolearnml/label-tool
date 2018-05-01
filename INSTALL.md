@@ -6,7 +6,7 @@ git clone https://github.com/dolearnml/label-tool.git label
 ```
 
 # Install LEMP stack
-https://www.digitalocean.com/community/tutorials
+https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-in-ubuntu-16-04
 
 ```bash
 sudo apt install -y nginx
