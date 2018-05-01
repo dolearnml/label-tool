@@ -96,6 +96,7 @@ sudo nano /etc/php/7.0/fpm/php.ini
 sudo systemctl restart php7.0-fpm
 ```
 
+# Prepare the server
 ### Copy the code and set permissions
 ```bash
 sudo cp -R <path to label-tool repository>/* /var/www/html/
