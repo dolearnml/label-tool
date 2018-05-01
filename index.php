@@ -10,7 +10,9 @@
 <!--
 <link rel="stylesheet" type="text/css" href="style.css?v=2">
 -->
+<!--
 <link rel="icon" href="/favicon.ico?v=2">
+-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -220,13 +222,17 @@ if ($label_form) {
 $(function() {
     $('img').on('click', function() {
         thumbpath = $(this).attr('src');
-        imgpath = 'images' + thumbpath.substr('thumbnails'.length);
+        imgpath = thumbpath.substr(0,'thumbnails'.length) === 'thumbnails' ? 'images' + thumbpath.substr('thumbnails'.length) : thumbpath;
         //console.log(thumbpath, imgpath);
         $('.enlargeImageModalSource').attr('src', imgpath);
         $('#enlargeImageModal').modal('show');
     });
 });
+
+(function(){var atf,buff,max,totalLoaded=0;atf=document.getElementById("atf");if(!atf){return false;}buff=atf.getAttribute("data-btf");buff=buff.split(";");max=buff.length;for(var i=0;i<max;i++){if(buff[i]!==""){var link=document.createElement("link");link.rel="stylesheet";link.href=buff[i];link.onload=function(){totalLoaded++;if(totalLoaded>=max){atf.parentElement.removeChild(atf);}};document.head.appendChild(link);}}window.btf=this;})(window);
 </script>
+<!--
 <script async src="/assets/js/btf.js"></script>
+-->
 </body>
 </html>
